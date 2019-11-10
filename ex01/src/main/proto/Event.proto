@@ -1,0 +1,37 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_outer_classname = "EventProto";
+option java_package = "com.example.demo.proto";
+
+package com.test.jdh.ex01;
+
+// 클래스와 유사
+message EventRequest {
+    string sourceId = 1;
+    string eventId = 2;
+}
+message EventResponse {
+    string result = 1;
+}
+
+
+// 클라이언트와 서버 통신 구현??
+
+service NewdataService {
+
+    // 1:1
+    rpc unaryEvent (EventRequest) returns (EventResponse) {
+    }
+
+    // 1:N
+    rpc serverStreamingEvent (EventRequest) returns (stream EventResponse) {
+    }
+
+    // N:1
+    rpc clientStreamingEvent (stream EventRequest) returns (EventResponse) {
+    }
+
+    // N:N
+    rpc biStreamingEvent (stream EventRequest) returns (stream EventResponse) {
+    }
+}
